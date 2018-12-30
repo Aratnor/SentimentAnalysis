@@ -1,17 +1,25 @@
 package preprocessing;
 
+
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileHandlerTest {
 
     @BeforeAll
-    public void setUp() throws Exception {
-    }
-
 
     @org.junit.jupiter.api.Test
-    void readFromFile() {
+    void readFromFile() throws IOException {
+        assertEquals(Arrays.asList("Bu bir denemedir.","Bu bir denemedir."),FileHandler.readFromFile("deneme.txt"));
+    }
+
+    @Test
+    void writeToFile(){
+
     }
 }
