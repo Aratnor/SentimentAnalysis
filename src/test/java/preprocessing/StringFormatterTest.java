@@ -33,4 +33,11 @@ class StringFormatterTest {
         String example2 = "Bu COk berbat bir film";
         assertEquals(Arrays.asList(example.toLowerCase(),example2.toLowerCase()),StringFormatter.toLowerCase(Arrays.asList(example,example2)));
     }
+
+    @Test
+    void getTotalWords() {
+        String example = "Bu harika bir film";
+        String example2 = "Bu cok berbat bir film";
+        assertEquals(9.0,StringFormatter.getTotalWords(Arrays.asList(example,example2)));
+    }
 }

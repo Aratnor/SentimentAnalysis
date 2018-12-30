@@ -38,5 +38,13 @@ public class StringFormatter {
         return lines;
     }
 
+    public static double getTotalWords(List<String> lines) {
+        int total = 0;
+        for(String line : lines) {
+            total += getWords(line).length;
+
+        }
+        return total;
+    }
 
 }
