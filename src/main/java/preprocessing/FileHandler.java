@@ -2,48 +2,35 @@ package preprocessing;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class FileHandler {
-    static ArrayList<String> lines;
-    BlockingQueue queue;
-    BufferedReader fileReader;
-    BufferedWriter fileWriter
-    public FileHandler(String path) {
-        lines = new ArrayList<>();
-        queue = new ArrayBlockingQueue(100);
-        try {
-            fileReader = new BufferedReader(new FileReader(path));
-            fileWriter = new BufferedWriter(new FileWriter(path));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    public static ArrayList<String> readFromFile(String filePath) throws IOException {
+        ArrayList<String> words = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            words.add(line);
         }
-    }
-    void readFromFile()  {
-        try {
-            String line;
-            while((line = fileReader.readLine()) != null) {
-                lines.add(line);
-            }
-            fileReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found for reading");
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        reader.close();
+        return words;
     }
 
-    void writeToFile(String path) {
-        String newline = System.getProperty("line.separator");
-
-        for(int i = 0;i< lines.size();i++) {
-            try {
-                fileWriter.write(lines.get(i)+newline);
-            } catch (IOException e) {
-                e.printStackTrace();
+    public static int writeToFile(List<String> lines, String filePath) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            String nextLine = System.getProperty("line.separator");
+            for(String line : lines) {
+                writer.write(line+ nextLine);
             }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
         }
+        return 1;
     }
 }
